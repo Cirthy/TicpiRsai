@@ -26,9 +26,3 @@ def is_prime(p):
 	if("is prime" in r.stdout.decode("UTF-8")):
 		return 1
 	return 0
-
-count = 0
-for i in range(10000):
-	if(is_prime(random_number(100))):
-		count += 1
-print(count / 10000)
