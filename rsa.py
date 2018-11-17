@@ -1,17 +1,16 @@
 #!/usr/bin/python3
 
 import config
+import binascii
 
 def encrypt(plain, n):
-	encodedPlain = ''
-	for i in (plain.encode('UTF-8')):
-		encodedPlain += str(hex(i))[2:]
-	print(str(int(encodedPlain, 16)) + "\n\n")
-	return lpowmod(int(encodedPlain, 16), config.e, n)
+	encodedPlain = int(binascii.hexlify(plain.encode('utf-8')), 16)
+	return lpowmod(encodedPlain, config.e, n)
 
 def decrypt(cipher, p, q):
 	d = modinv(config.e, (p - 1) * (q - 1))
-	return lpowmod(cipher, d, p * q)
+	encodedPlain = lpowmod(cipher, d, p * q)
+	return binascii.unhexlify(hex(encodedPlain)[2:].encode('ascii')).decode('utf-8')
 
 def ecgd(a, b):
 	x, y, u, v = 0, 1, 1, 0
