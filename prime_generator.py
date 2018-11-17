@@ -3,17 +3,17 @@
 import random
 import subprocess
 
-def random_prime(max): # max = nombre de chiffres du nombre premier
-	p = random_number(max)
+def random_prime(size): # size = nombre de chiffres du nombre premier
+	p = random_number(size)
 	while(not is_prime(p)):
-		p = random_number(max)
+		p = random_number(size)
 	return p
 
-def random_number(max): # max = nombre de chiffres du nombre
+def random_number(size): # size = nombre de chiffres du nombre
 	nbr = ""
 	random.seed()
-	for i in range(max - 1, -1, -1):
-		if(i == max - 1):
+	for i in range(size - 1, -1, -1):
+		if(i == size - 1):
 			nbr += random.choice('123456789')
 		elif(i == 0):
 			nbr += random.choice('1379')
