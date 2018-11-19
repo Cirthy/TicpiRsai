@@ -12,6 +12,12 @@ def decrypt(cipher, p, q):
 	encodedPlain = lpowmod(cipher, d, p * q)
 	return binascii.unhexlify(hex(encodedPlain)[2:].encode('ascii')).decode('utf-8')
 
+
+# utiliser $var.to_bytes(512, byteorder='big', signed=True) 
+#          int.from_bytes($var, byteorder='big')
+
+
+
 def ecgd(a, b):
 	x, y, u, v = 0, 1, 1, 0
 	while(a != 0):
