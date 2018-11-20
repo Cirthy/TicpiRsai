@@ -6,7 +6,18 @@ import os
 import config
 
 
-def display_menu():
+def display_menu(index):
+	index%=4
+	if (index==0):
+		print("#   --> Démarrer un serveur.\n#       Se connecter a un serveur en tant que client.\n#       Crédit.\n#       Quitter.")
+	elif (index==1):
+		print("#       Démarrer un serveur.\n#   --> Se connecter a un serveur en tant que client.\n#       Crédit.\n#       Quitter.")
+	elif (index==2):
+		print("#       Démarrer un serveur.\n#       Se connecter a un serveur en tant que client.\n#   --> Crédit.\n#       Quitter.")
+	else:
+		print("#       Démarrer un serveur.\n#       Se connecter a un serveur en tant que client.\n#       Crédit.\n#   --> Quitter.")
+
+def display_banner():
 	os.system("clear")
 	print("###################################################################################################")
 	print("############################   _____ _            _                _   ############################")
@@ -27,7 +38,7 @@ def display_waiting_vitevite():
 
 
 def display_progress_vitevite(n):
-	display_menu()
+	display_banner()
 	print("# Chargement du programme ...                                                                     #")
 	for line in config.VITEVITE:
 		
@@ -91,12 +102,3 @@ def dislpay_progress_bar(n):
 	time.sleep(0.2)
 	for i in range(config.PROGRESS_BAR_SIZE+2):
 		sys.stdout.write('\b')
-
-
-
-def remove_display_waiting():
-	sys.stdout.flush()
-	sys.stdout.write('\b\b\b')
-
-
-
