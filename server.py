@@ -31,7 +31,7 @@ def server_start(port):
 	sys.stdout.write('\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b                           ')
 	sys.stdout.flush()
 
-	print("\n#    " + str(tsap_client) + " est connecté.")
+	print("\n#    " + str(tsap_client) + " est connecté.\n#\n#\n#    => ",end='')
 	return s,connexion,tsap_client
 
 
@@ -44,13 +44,11 @@ def server_run(s,connexion,tsap_client):
 	while 1:
 		if not pid:
 			#enfant
-			recu = connexion.recv(1024)
-			# 512 suffit
-			
+			recu = connexion.recv(512)
 		else:
 			#parent
-			envoi = ""
-			if envoi == 'Q':
+			envoi = input()
+			if (envoi == 'quit' or envoi == 'exit'):
 				os.kill(pid, 9) # terminaison du processus enfant
 				connexion.close()
 				sys.exit(0)
