@@ -20,7 +20,8 @@ def read_char(stdscr):
 pid = os.fork()
 if not pid :
 	display_waiting_vitevite()
-p, q = random_prime(config.PRIME_SIZE), random_prime(config.PRIME_SIZE)
+config.p = random_prime(config.PRIME_SIZE)
+config.q = random_prime(config.PRIME_SIZE)
 os.kill(pid, 9)
 # Chargementy terminer
 
@@ -45,13 +46,13 @@ while(not quit):
 		if (pressed == 10):#ENTER
 			if (index%4==0):#démarrage serveur
 				display_banner()
-				s,connexion,tsap_client = server_start(8790)
-				server_run(s,connexion,tsap_client)
+				s = server_start(8790)
+				chat_run(s)
 				quit = True
 			if (index%4==1):#connexion client
 				display_banner()
-				client_start()
-				client_run()
+				s = client_start()
+				chat_run(s)
 				quit = True
 			if (index%4==2):#crédits
 				pass
@@ -64,22 +65,12 @@ while(not quit):
 
 
 
-print('\n\nindex')
-
-
-
-#serveur_start()
-
-
-
 print('\n\n')
 
-print(p)
-print(q)
 
-
-
-cypher = encrypt(input("Enter message : "), p * q)
-plain = decrypt(cypher, p, q)
+'''
+cypher = encrypt(input("Enter message : "), config.p * config.q)
+plain = decrypt(cypher, config.p, config.q)
 print("cypher = " + str(cypher) + "\nplain : " + plain)
+'''
 

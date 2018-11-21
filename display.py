@@ -102,3 +102,12 @@ def dislpay_progress_bar(n):
 	time.sleep(0.2)
 	for i in range(config.PROGRESS_BAR_SIZE+2):
 		sys.stdout.write('\b')
+
+
+
+def display_Mr_port(string):
+	for line in config.MR_PORT:
+		if (string=='client'):
+			print('#      '+line)
+		elif (string=='credit'):
+			print('           '+line)
