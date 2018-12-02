@@ -11,8 +11,7 @@ i:
 cleanpy :
 	rm -r __pycache__
 
-git :
-	cleanpy
+git : cleanpy
 	git add *
 	git commit -m $(c)
 	git push origin master
