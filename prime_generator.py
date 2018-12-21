@@ -3,11 +3,14 @@
 import random
 import subprocess
 
+
+
 def random_prime(size): # size = nombre de chiffres du nombre premier
 	p = random_number(size)
 	while(not is_prime(p)):
 		p = random_number(size)
 	return p
+
 
 def random_number(size): # size = nombre de chiffres du nombre
 	nbr = ""
@@ -20,6 +23,7 @@ def random_number(size): # size = nombre de chiffres du nombre
 		else:
 			nbr += random.choice('0123456789')
 	return int(nbr)
+
 
 def is_prime(p):
 	r = subprocess.run("openssl prime " + str(p), shell = True, stdout=subprocess.PIPE)
