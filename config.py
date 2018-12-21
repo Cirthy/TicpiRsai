@@ -2,11 +2,10 @@ e = 65537
 p = 1
 q = 1
 n = 1
-toto = 158
 d = 0
 PROGRESS_BAR_SIZE = 20
 
-BITE
+
 
 VITEVITE = ['                     ______     ',
             '    .----.   @   @  / Vite `--. ',
@@ -16,7 +15,7 @@ VITEVITE = ['                     ______     ',
             "'---`----'----'            xxx  "]
 VITEVITE_DELAY = 0.09
 
-OUIOUOIUOIOUOIUOIOUIOUOIUOIOUO
+
 
 MR_PORT =  ['                                 ,',
 			'         G3e                    .P.',
@@ -37,19 +36,3 @@ MR_PORT =  ['                                 ,',
 			'               .  .,,,  ,,,.*L  L  L',
 			'               .  | |        L  L ..',
 			'               \\.=[ (        !./^``']
-
-
-nouvelle variable = 5644
-
-
-
-
-
-
-
-
-
-
-
-
-
