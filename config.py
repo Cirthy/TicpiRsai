@@ -5,7 +5,7 @@ n = 1
 d = 0
 PROGRESS_BAR_SIZE = 20
 
-
+BITE
 
 VITEVITE = ['                     ______     ',
             '    .----.   @   @  / Vite `--. ',
@@ -15,7 +15,7 @@ VITEVITE = ['                     ______     ',
             "'---`----'----'                 "]
 VITEVITE_DELAY = 0.09
 
-
+OUIOUOIUOIOUOIUOIOUIOUOIUOIOUO
 
 MR_PORT =  ['                                 ,',
 			'                                .P.',
