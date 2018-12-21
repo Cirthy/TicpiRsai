@@ -1,14 +1,12 @@
 #!/usr/bin/python3
 
-
 import socket
 import os
 import sys
 import time
 import config
-from   isplay   import *
+from   display   import *
 from   rsa		import *
-
 
 
 
@@ -46,14 +44,8 @@ def server_start(port):
 	return connexion
 
 
-
-
-
-
 def client_start():
 	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-
 
 	#tsap_server = ('fst-o-i-209-08.unilim.fr',8080)
 	print("#\n#    Sur quelle adresse souhaitez-vous vous connecter ? ",end='')
@@ -81,11 +73,7 @@ def client_start():
 	config.n = int.from_bytes(s.recv(512), byteorder='big')
 	s.sendall((config.p*config.q).to_bytes(512, byteorder='big', signed=False))
 
-
 	return s
-
-
-
 
 
 def chat_run(s):
@@ -116,7 +104,3 @@ def chat_run(s):
 			envoi = envoi_cypher.to_bytes(512, byteorder='big', signed=False)
 			print('#    =>',end='')
 			s.sendall(envoi)
-
-
-
-

@@ -1,8 +1,8 @@
 e = 65537
-p = 0
-q = 0
-n = 0
-PRIME_SIZE = 500
+p = 1
+q = 1
+n = 1
+d = 0
 PROGRESS_BAR_SIZE = 20
 
 
@@ -14,9 +14,6 @@ VITEVITE = ['                     ______     ',
             " ,-\\ `-.' /.'  /                ",
             "'---`----'----'                 "]
 VITEVITE_DELAY = 0.09
-
-
-
 
 
 
