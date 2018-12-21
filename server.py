@@ -6,8 +6,8 @@ import os
 import sys
 import time
 import config
-from  display          import *
-from 	rsa			import *
+from   isplay   import *
+from   rsa		import *
 
 
 
