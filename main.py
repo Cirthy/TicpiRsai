@@ -19,10 +19,10 @@ def read_char(stdscr):
 pid = os.fork() # Un processus fait un affichage pendant que l'autre génère les nombres premiers
 if not pid :
 	display_waiting_vitevite()
-config.p = random_prime(500)
+config.p = random_prime(config.PRIME_SIZE_P)
 while(ecgd((config.p - 1) * (config.q - 1), config.e)[0] != 1): # e doit être premier avec phi(n)
-	config.q = random_prime(451 + random.randrange(50))
-config.d = modinv(config.e, (p - 1) * (q - 1))
+	config.q = random_prime(config.MIN_PRIME_SIZE_Q + random.randrange(AMPL_PRIME_SIZE_Q))
+config.d = modinv(config.e, (config.p - 1) * (config.q - 1))
 os.kill(pid, 9) # Chargement terminé
 
 index = 0

@@ -1,4 +1,7 @@
 e = 65537
+PRIME_SIZE_P = 500
+MIN_PRIME_SIZE_Q = 451
+AMPL_PRIME_SIZE_Q = 20
 p = 1
 q = 1
 n = 1

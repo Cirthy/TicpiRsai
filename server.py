@@ -13,13 +13,13 @@ from   rsa		import *
 def server_start(port):
 
 	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+	s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) # Le port redevient utilisable tout de suite après avoir été fermé
 
 	s.bind(('',port))
 	s.listen(1)
 
 	print("#\n#    Serveur lancé avec succes. En attente de connexion    ",end='')
-	pid = os.fork()
+	pid = os.fork() # Affichage de l'attente de connexion
 	if(not pid):
 		while(1):
 			sys.stdout.write('\b\b\b.  ')
@@ -47,23 +47,8 @@ def server_start(port):
 def client_start():
 	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-	#tsap_server = ('fst-o-i-209-08.unilim.fr',8080)
 	print("#\n#    Sur quelle adresse souhaitez-vous vous connecter ? ",end='')
 	ip = input()
-
-	expPort = "^[0-9]{4}$"
-
-#	while 1:
-	print("#    Via quel port ? ",end='')
-	port = input()
-	if (port == 'Mr port'):
-		display_Mr_port("client")
-		print("#\n#    Et plus serieusement ? ",end='')
-		port = input()
-#		if re.match(expPort,port)is None :
-#	        print("Le numéro est incorrect.")
-#	        continue
-#	    break
 
 	tsap_server = (ip,int(port))
 	s.connect(tsap_server)
