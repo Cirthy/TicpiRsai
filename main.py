@@ -45,7 +45,7 @@ while(True):
 		if (pressed == 10): # ENTER
 			if (index%4==0): # démarrage serveur
 				display_banner()
-				chat_run(server_start(config.port_number))
+				chat_run(server_start())
 				break
 			if (index%4==1): # connexion client
 				display_banner()
@@ -54,7 +54,6 @@ while(True):
 			if (index%4==2): # crédits
 				display_banner()
 				display_credits()
-				
 			if (index%4==3): # quit
 				break
 	time.sleep(0.1) # refresh pour l'attente d'une entrée
