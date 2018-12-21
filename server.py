@@ -39,7 +39,7 @@ def server_start(port):
 	print("\n#    " + str(tsap_client) + " est connecté.\n#\n#\n#")
 
 	connexion.sendall((config.p*config.q).to_bytes(512, byteorder='big', signed=False))
-	config.n = int.from_bytes(connexion.recv(512), byteorder='big')
+	config.n_distant = int.from_bytes(connexion.recv(512), byteorder='big')
 
 	return connexion
 
@@ -55,7 +55,7 @@ def client_start():
 
 	print("#    Connecté a "+ ip + ".\n#\n#\n#")
 
-	config.n = int.from_bytes(s.recv(512), byteorder='big')
+	config.n_distant = int.from_bytes(s.recv(512), byteorder='big')
 	s.sendall((config.p*config.q).to_bytes(512, byteorder='big', signed=False))
 
 	return s
@@ -85,7 +85,7 @@ def chat_run(s):
 				os.kill(pid, 9) # terminaison du processus enfant
 				s.close()
 				sys.exit(0)
-			envoi_cypher = encrypt(envoi_plain, config.n)
+			envoi_cypher = encrypt(envoi_plain, config.n_distant)
 			envoi = envoi_cypher.to_bytes(512, byteorder='big', signed=False)
 			print('#    =>',end='')
 			s.sendall(envoi)

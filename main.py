@@ -21,7 +21,8 @@ if not pid :
 	display_waiting_vitevite()
 config.p = random_prime(config.PRIME_SIZE_P)
 while(ecgd((config.p - 1) * (config.q - 1), config.e)[0] != 1): # e doit être premier avec phi(n)
-	config.q = random_prime(config.MIN_PRIME_SIZE_Q + random.randrange(AMPL_PRIME_SIZE_Q))
+	config.q = random_prime(config.MIN_PRIME_SIZE_Q + random.randrange(config.AMPL_PRIME_SIZE_Q))
+config.n_local = config.p * config.q
 config.d = modinv(config.e, (config.p - 1) * (config.q - 1))
 os.kill(pid, 9) # Chargement terminé
 
@@ -44,13 +45,11 @@ while(True):
 		if (pressed == 10): # ENTER
 			if (index%4==0): # démarrage serveur
 				display_banner()
-				s = server_start(8790)
-				chat_run(s)
+				chat_run(server_start(config.port_number))
 				break
 			if (index%4==1): # connexion client
 				display_banner()
-				s = client_start()
-					chat_run(s)
+				chat_run(client_start())
 				break
 			if (index%4==2): # crédits
 				display_banner()

@@ -1,11 +1,16 @@
-e = 65537
 PRIME_SIZE_P = 500
 MIN_PRIME_SIZE_Q = 451
 AMPL_PRIME_SIZE_Q = 20
+
+e = 65537
 p = 1
 q = 1
-n = 1
+n_local = 1
 d = 0
+
+port_number = 8790
+n_distant = 1
+
 PROGRESS_BAR_SIZE = 20
 
 

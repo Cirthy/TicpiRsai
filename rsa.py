@@ -5,13 +5,13 @@ import	binascii
 
 
 
-def encrypt(plain, n):
+def encrypt(plain):
 	encodedPlain = int(binascii.hexlify(plain.encode('utf-8')), 16)
-	return lpowmod(encodedPlain, config.e, n)
+	return lpowmod(encodedPlain, config.e, config.n_local)
 
 
-def decrypt(cipher, p, q):
-	encodedPlain = lpowmod(cipher, config.d, p * q)
+def decrypt(cipher):
+	encodedPlain = lpowmod(cipher, config.d, config.n_local)
 	return binascii.unhexlify(hex(encodedPlain)[2:].encode('ascii')).decode('utf-8')
 
 
