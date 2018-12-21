@@ -26,16 +26,15 @@ config.d = modinv(config.e, (p - 1) * (q - 1))
 os.kill(pid, 9) # Chargement terminé
 
 index = 0
-quit = False
 
-while(not quit):
+while(True):
 	display_banner()
 	print("#\n#    Ticpirsai est prêt à établir une connection :\n#")
 	display_menu(index)
 	print('\n\n\n')
-	pressed = curses.wrapper(read_char)
+	pressed = curses.wrapper(read_char) # curses = entrée de touches sans buffer
 	if (pressed != -1):
-		if (pressed == 27): # touches dirrectionelles
+		if (pressed == 27): # 27 <=> touches dirrectionelles
 			pressed = curses.wrapper(read_char)
 			pressed = curses.wrapper(read_char)
 			if (pressed == 65): # UP
@@ -47,18 +46,18 @@ while(not quit):
 				display_banner()
 				s = server_start(8790)
 				chat_run(s)
-				quit = True
+				break
 			if (index%4==1): # connexion client
 				display_banner()
 				s = client_start()
-				chat_run(s)
-				quit = True
+					chat_run(s)
+				break
 			if (index%4==2): # crédits
-				pass
+				display_banner()
+				break
 			if (index%4==3): # quit
-				quit = True
-
-	time.sleep(0.1)
+				break
+	time.sleep(0.1) # refresh pour l'attente d'une entrée
 
 print('\n\n')
 
