@@ -15,6 +15,12 @@ def read_char(stdscr):
 	return stdscr.getch()
 
 
+print("Veuillez agrandir la console pour que le programme s'affiche correctement.")
+while(True):
+	rows, columns = os.popen('stty size', 'r').read().split()
+	if(int(rows) > 19 and int(columns) > 98):
+		break
+	time.sleep(0.1)
 # Chargement du programme (génération des clés)
 pid = os.fork() # Un processus fait un affichage pendant que l'autre génère les nombres premiers
 if not pid :

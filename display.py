@@ -110,6 +110,6 @@ def display_Mr_port(string):
 
 
 def display_credits():
-	print("#\n#\n#\tProjet réalisé par Baptiste Beltzer et Clément Hoffmann dans le cadre du master maths CRYPTIS.")
+	print("#\n#\n#\tProjet réalisé par Baptiste Beltzer et Clément Hoffmann dans le cadre du master CRYPTIS.")
 	print("#\tChaleureux remerciements à Morgane Vollmer pour l'inspiration artistique.")
 	input("#\n#\t(Appuyer sur Entrée pour sortir des crédits)")
