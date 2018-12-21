@@ -5,7 +5,7 @@ import	os, sys, readline, io, select, curses, random
 from	prime_generator	import *
 from	rsa				import *
 from	display			import *
-from	server			import *
+from	network			import *
 
 
 
