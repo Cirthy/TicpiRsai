@@ -6,7 +6,7 @@ toto = 158
 d = 0
 PROGRESS_BAR_SIZE = 20
 
-
+BITE
 
 VITEVITE = ['                     ______     ',
             '    .----.   @   @  / Vite `--. ',
@@ -16,7 +16,7 @@ VITEVITE = ['                     ______     ',
             "'---`----'----'            xxx  "]
 VITEVITE_DELAY = 0.09
 
-
+OUIOUOIUOIOUOIUOIOUIOUOIUOIOUO
 
 MR_PORT =  ['                                 ,',
 			'         G3e                    .P.',
