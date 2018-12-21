@@ -7,7 +7,7 @@ import	binascii
 
 def encrypt(plain):
 	encodedPlain = int(binascii.hexlify(plain.encode('utf-8')), 16)
-	return lpowmod(encodedPlain, config.e, config.n_local)
+	return lpowmod(encodedPlain, config.e, config.n_distant)
 
 
 def decrypt(cipher):

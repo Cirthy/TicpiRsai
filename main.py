@@ -53,7 +53,8 @@ while(True):
 				break
 			if (index%4==2): # crédits
 				display_banner()
-				break
+				display_credits()
+				
 			if (index%4==3): # quit
 				break
 	time.sleep(0.1) # refresh pour l'attente d'une entrée

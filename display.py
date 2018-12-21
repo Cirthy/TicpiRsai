@@ -6,6 +6,7 @@ import os
 import config
 
 
+
 def display_menu(index):
 	index%=4
 	if (index==0):
@@ -16,6 +17,7 @@ def display_menu(index):
 		print("#       Démarrer un serveur.\n#       Se connecter a un serveur en tant que client.\n#   --> Crédit.\n#       Quitter.")
 	else:
 		print("#       Démarrer un serveur.\n#       Se connecter a un serveur en tant que client.\n#       Crédit.\n#   --> Quitter.")
+
 
 def display_banner():
 	os.system("clear")
@@ -28,7 +30,6 @@ def display_banner():
 	print("############################               |_|                         ############################")
 	print("###################################################################################################")
 	
-
 
 def display_waiting_vitevite():
 	i=0
@@ -71,16 +72,12 @@ def display_progress_vitevite(n):
 	time.sleep(config.VITEVITE_DELAY)
 
 
-
-
-
-
-
 def display_waiting():
 	i=0
 	while(1):
 		dispay_progress_bar(i%(config.PROGRESS_BAR_SIZE+2)-2)
 		i+=1
+
 
 def dislpay_progress_bar(n):
 	compt = 0
@@ -104,10 +101,15 @@ def dislpay_progress_bar(n):
 		sys.stdout.write('\b')
 
 
-
 def display_Mr_port(string):
 	for line in config.MR_PORT:
 		if (string=='client'):
 			print('#      '+line)
 		elif (string=='credit'):
 			print('           '+line)
+
+
+def display_credits():
+	print("#\tProjet réalisé par Baptiste Beltzer et Clément Hoffmann dans le cadre du master maths CRYPTIS.")
+	print("#\tChaleureux remerciements à Morgane Vollmer pour l'inspiration artistique.")
+	print("#\t\n#\t(Esc pour sortir des crédits)")
