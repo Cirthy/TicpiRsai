@@ -17,49 +17,73 @@ def server_start():
 
 	s.bind(('',config.PORT_NUMBER))
 	s.listen(1)
-
-	print("#\n#    Serveur lancé avec succes. En attente de connexion    ",end='')
+	print("#                                                                                                 #")
 	pid = os.fork() # Affichage de l'attente de connexion
 	if(not pid):
 		while(1):
-			sys.stdout.write('\b\b\b.  ')
+			sys.stdout.write('\r#    Serveur lancé avec succes. En attente de connexion .                                         #')
 			sys.stdout.flush()
 			time.sleep(0.7)
-			sys.stdout.write('\b\b\b.. ')
+			sys.stdout.write('\r#    Serveur lancé avec succes. En attente de connexion ..                                        #')
 			sys.stdout.flush()
 			time.sleep(0.7)
-			sys.stdout.write('\b\b\b...')
+			sys.stdout.write('\r#    Serveur lancé avec succes. En attente de connexion ...                                       #')
 			sys.stdout.flush()
 			time.sleep(0.7)
 	connexion,tsap_client = s.accept()
 	os.kill(pid, 15)
-	sys.stdout.write('\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b                           ')
-	sys.stdout.flush()
-
-	print("\n#    " + str(tsap_client) + " est connecté.\n#\n#")
 
 	connexion.sendall((config.p*config.q).to_bytes(512, byteorder='big', signed=False))
 	config.n_distant = int.from_bytes(connexion.recv(512), byteorder='big')
 
 
-	# les deux ligne suivantes règle un problème d'affichage car la reception du n_distant affiche 4 retours a la ligne
+	# les deux ligne suivantes règlent un problème d'affichage car la reception du n_distant affiche 4 retours a la ligne
 	display_banner()
-	print("#\n#    Serveur lancé avec succes.")
-	print("#    " + str(tsap_client) + " est connecté.\n#\n#")
+	print("#                                                                                                 #")
+	print("\r#    Serveur lancé avec succes.                                                                   #")
+	print("#    " + str(tsap_client) + " est connecté.", end='')
+	for i in range(79-len(str(tsap_client))):
+		print(" ",end='')
+	print("#")
+	print("#                                                                                                 #")
+	#--------------------------------------------------------------------------------------------------------------------
+
 
 	return connexion
 
 
+
+
 def client_start():
 	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	conectionError = False
+	while True:
+		display_banner()
+		if (conectionError):
+			print("#    Erreur de connexion.                                                                         #")
+		else:
+			print("#                                                                                                 #")
+		
+		print("#    Sur quelle adresse souhaitez-vous vous connecter ? ",end='')
+		ip = input()
+		tsap_client = (ip,config.PORT_NUMBER)
 
-	print("#\n#    Sur quelle adresse souhaitez-vous vous connecter ? ",end='')
-	ip = input()
+		try:
+			s.connect(tsap_client)
+		except socket.error:
+			conectionError = True
+			continue
+		break
 
-	tsap_server = (ip,config.PORT_NUMBER)
-	s.connect(tsap_server)
+	display_banner()
+	print("#                                                                                                 #")
+	print("#    Connecté a " + ip + ".", end='')
+	for i in range(81-len(str(ip))):
+		print(" ",end='')
+	print("#")
+	print("#                                                                                                 #")
 
-	print("#    Connecté a "+ ip + ".\n#\n#")
+
 
 	config.n_distant = int.from_bytes(s.recv(512), byteorder='big')
 	s.sendall((config.p*config.q).to_bytes(512, byteorder='big', signed=False))

@@ -10,13 +10,25 @@ import config
 def display_menu(index):
 	index%=4
 	if (index==0):
-		print("#   --> Démarrer un serveur.\n#       Se connecter a un serveur en tant que client.\n#       Crédit.\n#       Quitter.")
+		print("#   --> Démarrer un serveur                                                                       #")
+		print("#       Se connecter a un serveur en tant que client                                              #")
+		print("#       Crédit                                                                                    #")
+		print("#       Quitter                                                                                   #")
 	elif (index==1):
-		print("#       Démarrer un serveur.\n#   --> Se connecter a un serveur en tant que client.\n#       Crédit.\n#       Quitter.")
+		print("#       Démarrer un serveur                                                                       #")
+		print("#   --> Se connecter a un serveur en tant que client                                              #")
+		print("#       Crédit                                                                                    #")
+		print("#       Quitter                                                                                   #")
 	elif (index==2):
-		print("#       Démarrer un serveur.\n#       Se connecter a un serveur en tant que client.\n#   --> Crédit.\n#       Quitter.")
+		print("#       Démarrer un serveur                                                                       #")
+		print("#       Se connecter a un serveur en tant que client                                              #")
+		print("#   --> Crédit                                                                                    #")
+		print("#       Quitter                                                                                   #")
 	else:
-		print("#       Démarrer un serveur.\n#       Se connecter a un serveur en tant que client.\n#       Crédit.\n#   --> Quitter.")
+		print("#       Démarrer un serveur                                                                       #")
+		print("#       Se connecter a un serveur en tant que client                                              #")
+		print("#       Crédit                                                                                    #")
+		print("#   --> Quitter                                                                                   #")
 
 
 def display_banner():
@@ -101,15 +113,16 @@ def dislpay_progress_bar(n):
 		sys.stdout.write('\b')
 
 
-def display_Mr_port(string):
+def display_Mr_port():
 	for line in config.MR_PORT:
-		if (string=='client'):
-			print('#      '+line)
-		elif (string=='credit'):
-			print('           '+line)
+		print(line)
 
 
 def display_credits():
-	print("#\n#\n#\tProjet réalisé par Baptiste Beltzer et Clément Hoffmann dans le cadre du master CRYPTIS.")
-	print("#\tChaleureux remerciements à Morgane Vollmer pour l'inspiration artistique.")
-	input("#\n#\t(Appuyer sur Entrée pour sortir des crédits)")
+	print("#                                                                                                 #")
+	print("#                                                                                                 #")
+	print("#       Projet réalisé par Baptiste Beltzer et Clément Hoffmann dans le cadre du master CRYPTIS.  #")
+	print("#       Chaleureux remerciements à Morgane Vollmer pour l'inspiration artistique.                 #")
+	print("#                                                                                                 #")
+	print("#                                              (Appuyer sur Entrée pour sortir des crédits)       #")
+	input()
