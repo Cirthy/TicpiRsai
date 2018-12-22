@@ -15,13 +15,19 @@ def read_char(stdscr):
 	return stdscr.getch()
 
 
+<<<<<<< HEAD
 os.system("clear")
 print("Veuillez agrandir la console pour que le programme s'affiche correctement.")
+=======
+print("Veuillez agrandir la console pour que le programme s'affiche correctement (min 99 colonnes).")
+>>>>>>> 3a54aead667b5ee3212a17fe0ec4f9d29b69b292
 while(True):
 	rows, columns = os.popen('stty size', 'r').read().split()
 	if(int(rows) > 19 and int(columns) > 98):
 		break
 	time.sleep(0.1)
+
+
 # Chargement du programme (génération des clés)
 pid = os.fork() # Un processus fait un affichage pendant que l'autre génère les nombres premiers
 if not pid :
@@ -37,8 +43,11 @@ index = 0
 
 while(True):
 	display_banner()
-	print("#\n#    Ticpirsai est prêt à établir une connection :\n#")
+	print("#                                                                                                 #")
+	print("#    Ticpirsai est prêt à établir une connection :                                                #")
+	print("#                                                                                                 #")
 	display_menu(index)
+
 	print('\n\n\n')
 	pressed = curses.wrapper(read_char) # curses = entrée de touches sans buffer
 	if (pressed != -1):
@@ -52,11 +61,21 @@ while(True):
 		if (pressed == 10): # ENTER
 			if (index%4==0): # démarrage serveur
 				display_banner()
+<<<<<<< HEAD
 				minimal_chat_run(server_start())
 				break
 			if (index%4==1): # connexion client
 				display_banner()
 				minimal_chat_run(client_start())
+=======
+				s = server_start()
+				chat_run(s)
+				break
+			if (index%4==1): # connexion client
+				display_banner()
+				s = client_start()
+				chat_run(s)
+>>>>>>> 3a54aead667b5ee3212a17fe0ec4f9d29b69b292
 				break
 			if (index%4==2): # crédits
 				display_banner()
