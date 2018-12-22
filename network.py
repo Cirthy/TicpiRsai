@@ -62,9 +62,8 @@ def client_start():
 		if (conectionError):
 			print("#    Erreur de connexion.                                                                         #")
 		else:
-			print("#                                                                                                 #")
-		
-		print("#    Sur quelle adresse souhaitez-vous vous connecter ? ",end='')
+			print("#                                                                                                 #")		
+		print("#    Sur quelle adresse souhaitez-vous vous connecter ?                                           #\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b",end='')
 		ip = input()
 		tsap_client = (ip,config.PORT_NUMBER)
 
@@ -118,34 +117,7 @@ def chat_run(s):
 			envoi = envoi_cypher.to_bytes(512, byteorder='big', signed=False)
 			print('#    =>',end='')
 			s.sendall(envoi)
-			if (envoi_plain == 'quit' or envoi_plain == 'exit' or os.read(pipein,1)):
-				os.kill(pid, 9) # terminaison du processus enfant
-				s.close()
-				break;
-
-def minimal_chat_run(s):
-	pipein, pipeout = os.pipe()
-	pid = os.fork()
-	while 1:
-		if not pid:
-			#enfant
-			recu = s.recv(512)
-			recu_cipher = int.from_bytes(recu, byteorder='big')
-			recu_plain = decrypt(recu_cipher)
-			if(recu_plain == 'quit' or recu_plain == 'exit'):
-				print("Enfant a reçu exit")
-				os.write(pipeout,"a".encode("ascii")) # Ce qu'on met dans le pipe n'a pas d'importance, le seul moment où les deux processus communiquent est l'arrêt du chat
-				break;
-			print("\b\b\b\b" + recu_plain + "\n==> ", end='')
-		else:
-			#parent
-			print("==> ", end='')
-			envoi_plain = input("")
-			envoi_cypher = encrypt(envoi_plain)
-			envoi = envoi_cypher.to_bytes(512, byteorder='big', signed=False)
-			s.sendall(envoi)
-			if (envoi_plain == 'quit' or envoi_plain == 'exit' or os.read(pipein,1)):
-				print("Ca sort")
+			if (envoi_plain == 'quit' or envoi_plain == 'exit'):
 				os.kill(pid, 9) # terminaison du processus enfant
 				s.close()
 				break;

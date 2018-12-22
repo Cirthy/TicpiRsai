@@ -15,7 +15,6 @@ def read_char(stdscr):
 	return stdscr.getch()
 
 
-<<<<<<< HEAD
 os.system("clear")
 print("Veuillez agrandir la console pour que le programme s'affiche correctement.")
 =======
@@ -61,13 +60,11 @@ while(True):
 		if (pressed == 10): # ENTER
 			if (index%4==0): # démarrage serveur
 				display_banner()
-<<<<<<< HEAD
 				minimal_chat_run(server_start())
 				break
 			if (index%4==1): # connexion client
 				display_banner()
 				minimal_chat_run(client_start())
-=======
 				s = server_start()
 				chat_run(s)
 				break
@@ -75,7 +72,6 @@ while(True):
 				display_banner()
 				s = client_start()
 				chat_run(s)
->>>>>>> 3a54aead667b5ee3212a17fe0ec4f9d29b69b292
 				break
 			if (index%4==2): # crédits
 				display_banner()
