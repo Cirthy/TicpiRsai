@@ -17,9 +17,7 @@ def read_char(stdscr):
 
 os.system("clear")
 print("Veuillez agrandir la console pour que le programme s'affiche correctement.")
-=======
 print("Veuillez agrandir la console pour que le programme s'affiche correctement (min 99 colonnes).")
->>>>>>> 3a54aead667b5ee3212a17fe0ec4f9d29b69b292
 while(True):
 	rows, columns = os.popen('stty size', 'r').read().split()
 	if(int(rows) > 19 and int(columns) > 98):
@@ -60,18 +58,11 @@ while(True):
 		if (pressed == 10): # ENTER
 			if (index%4==0): # démarrage serveur
 				display_banner()
-				minimal_chat_run(server_start())
+				chat_run(server_start())
 				break
 			if (index%4==1): # connexion client
 				display_banner()
-				minimal_chat_run(client_start())
-				s = server_start()
-				chat_run(s)
-				break
-			if (index%4==1): # connexion client
-				display_banner()
-				s = client_start()
-				chat_run(s)
+				chat_run(client_start())
 				break
 			if (index%4==2): # crédits
 				display_banner()

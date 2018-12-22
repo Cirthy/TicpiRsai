@@ -104,7 +104,7 @@ def chat_run(s):
 			recu_plain = decrypt(recu_cipher)
 			if(recu_plain == 'quit' or recu_plain == 'exit'):
 				os.write(pipeout,"a".encode("ascii")) # Ce qu'on met dans le pipe n'a pas d'importance, le seul moment où les deux processus communiquent est l'arrêt du chat
-				break;
+				break
 			print('\b\b\b\b\b\b\b\b\b',end='')
 			for i in range(93-len(recu_plain)):
 				print(' ',end='')
@@ -112,12 +112,28 @@ def chat_run(s):
 
 		else:
 			#parent
-			envoi_plain = input("")
-			envoi_cypher = encrypt(envoi_plain)
-			envoi = envoi_cypher.to_bytes(512, byteorder='big', signed=False)
-			print('#    =>',end='')
-			s.sendall(envoi)
-			if (envoi_plain == 'quit' or envoi_plain == 'exit'):
-				os.kill(pid, 9) # terminaison du processus enfant
-				s.close()
-				break;
+			read_pipe = os.fork()
+			if not read_pipe :
+				envoi_plain = input("")
+				if (envoi_plain == 'quit' or envoi_plain == 'exit'):
+					os.kill(pid, 9) # terminaison du processus enfant
+					os.write(pipeout,"a".encode("ascii"))
+					print("Receiver DEAD")
+					s.close()
+					break
+				envoi_cypher = encrypt(envoi_plain)
+				envoi = envoi_cypher.to_bytes(512, byteorder='big', signed=False)
+				print('#    =>',end='')
+				s.sendall(envoi)
+				else : # process se contente de lire le pipe en attendant un signal d'arrêt
+				os.read(pipein, 1)
+				os.kill(read_pipe, 9) # pas besoin de kill le processus pid, il s'est arrêté seul dans ce cas
+				print("Writer DEAD")
+				break
+
+	if not pid:
+		print("Receiver DEAD")
+	elif not read_pipe:
+		print("Writer DEAD")
+	else:
+		print("PIPE READER DEAD")
