@@ -1,7 +1,11 @@
-PRIME_SIZE_P = 50 # 500
-MIN_PRIME_SIZE_Q = 20 # 451
+
+# Taille des nombres premiers P et Q
+PRIME_SIZE_P = 500
+MIN_PRIME_SIZE_Q = 451
 AMPL_PRIME_SIZE_Q = 20
 
+
+# Valeurs de fonctionement de RSA
 e = 65537
 p = 1
 q = 1
@@ -9,12 +13,12 @@ n_local = 1
 n_distant = 1
 d = 0
 
+
+# Port de communication
 PORT_NUMBER = 8790
 
-PROGRESS_BAR_SIZE = 20
 
-
-
+# Affichage du ViteVite
 VITEVITE = ['                     ______     ',
             '    .----.   @   @  / Vite `--. ',
             '   / .-"-.`.  \\v/  <    Vite ! )',
@@ -25,22 +29,4 @@ VITEVITE_DELAY = 0.09
 
 
 
-MR_PORT =  ['                                 ,',
-			'                                .P.',
-			'                              ,z`  ".',
-			'                     ,,~.   ,^      |',
-			'                 "C`     ".,!--~~~-.F',
-			'                   \\  \\~~. `        `\\',
-			'                    L ". `           yQ.', 
-			'                    !,              ,ZK$',
-			"                    ,           J$L  **`'2*^\\",
-			"                 ,~=4.         "+'"'+"GDF     -HL'/",
-			'-.     ==.    ,^     \\.                 ,J*`',
-			'  L    \\.}  ;`        `\\,            /`',
-			'   `=..<^  ]              `*~.....~w`',
-			'           |                       /',
-			'           ".                     /L',
-			'             "=              .  )` [',
-			'               .  .,,,  ,,,.*L  L  L',
-			'               .  | |        L  L ..',
-			'               \\.=[ (        !./^``']
+

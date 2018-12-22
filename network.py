@@ -33,8 +33,11 @@ def server_start():
 	connexion,tsap_client = s.accept()
 	os.kill(pid, 15)
 
-	connexion.sendall((config.p*config.q).to_bytes(512, byteorder='big', signed=False))
+
+	# 512 octets pour l'échange des n car max(n possible) = 10^1000 = 16^830 donc 415 octets nécéssaire
+	connexion.sendall((config.n_local).to_bytes(512, byteorder='big', signed=False))
 	config.n_distant = int.from_bytes(connexion.recv(512), byteorder='big')
+	#--------------------------------------------------------------------------------------------------------------------
 
 
 	# les deux ligne suivantes règlent un problème d'affichage car la reception du n_distant affiche 4 retours a la ligne
@@ -63,7 +66,7 @@ def client_start():
 			print("#    Erreur de connexion.                                                                         #")
 		else:
 			print("#                                                                                                 #")		
-		print("#    Sur quelle adresse souhaitez-vous vous connecter ?                                           #\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b",end='')
+		print("#    Sur quelle adresse souhaitez-vous vous connecter ?                                           #\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b",end='')
 		ip = input()
 		tsap_client = (ip,config.PORT_NUMBER)
 
@@ -83,57 +86,40 @@ def client_start():
 	print("#                                                                                                 #")
 
 
-
+	# 512 octets pour l'échange des n car max(n possible) = 10^1000 = 16^830 donc 415 octets nécéssaire
 	config.n_distant = int.from_bytes(s.recv(512), byteorder='big')
-	s.sendall((config.p*config.q).to_bytes(512, byteorder='big', signed=False))
+	s.sendall((config.n_local).to_bytes(512, byteorder='big', signed=False))
+	#--------------------------------------------------------------------------------------------------------------------
 
 	return s
 
 
-def chat_run(s):
+def chat_run(socket):
 
-	pipein, pipeout = os.pipe()
 	pid = os.fork()
 	print('#    =>',end='')
 
 	while 1:
 		if not pid:
 			#enfant
-			recu = s.recv(512)
-			recu_cipher = int.from_bytes(recu, byteorder='big')
-			recu_plain = decrypt(recu_cipher)
-			if(recu_plain == 'quit' or recu_plain == 'exit'):
-				os.write(pipeout,"a".encode("ascii")) # Ce qu'on met dans le pipe n'a pas d'importance, le seul moment où les deux processus communiquent est l'arrêt du chat
-				break
-			print('\b\b\b\b\b\b\b\b\b',end='')
-			for i in range(93-len(recu_plain)):
-				print(' ',end='')
-			print(recu_plain + '\n#    =>',end='')
+			envoi_plain = input("")
+			envoi_cypher = encrypt(envoi_plain)
+			envoi = envoi_cypher.to_bytes(512, byteorder='big', signed=False)
+			print('#    =>',end='')
+			socket.sendall(envoi)
+
 
 		else:
 			#parent
-			read_pipe = os.fork()
-			if not read_pipe :
-				envoi_plain = input("")
-				if (envoi_plain == 'quit' or envoi_plain == 'exit'):
-					os.kill(pid, 9) # terminaison du processus enfant
-					os.write(pipeout,"a".encode("ascii"))
-					print("Receiver DEAD")
-					s.close()
-					break
-				envoi_cypher = encrypt(envoi_plain)
-				envoi = envoi_cypher.to_bytes(512, byteorder='big', signed=False)
-				print('#    =>',end='')
-				s.sendall(envoi)
-				else : # process se contente de lire le pipe en attendant un signal d'arrêt
-				os.read(pipein, 1)
-				os.kill(read_pipe, 9) # pas besoin de kill le processus pid, il s'est arrêté seul dans ce cas
-				print("Writer DEAD")
+			recu = socket.recv(512)
+			recu_cipher = int.from_bytes(recu, byteorder='big')
+			recu_plain = decrypt(recu_cipher)
+			if (recu_plain == 'quit' or recu_plain == 'exit'):
+				socket.sendall(encrypt('quit').to_bytes(512, byteorder='big', signed=False))
+				os.kill(pid, 15) # terminaison du processus enfant
 				break
+			else:
+				print('\b\b\b\b\b\b\b\b\b<=\t\t' + recu_plain + '\n#    =>',end='')
 
-	if not pid:
-		print("Receiver DEAD")
-	elif not read_pipe:
-		print("Writer DEAD")
-	else:
-		print("PIPE READER DEAD")
+	socket.close()
+
