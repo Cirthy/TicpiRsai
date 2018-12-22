@@ -97,15 +97,13 @@ def client_start():
 def chat_run(socket):
 
 	pid = os.fork()
-	print('#    =>',end='')
 
 	while 1:
 		if not pid:
 			#enfant
-			envoi_plain = input("")
+			envoi_plain = input("#  => ")
 			envoi_cypher = encrypt(envoi_plain)
 			envoi = envoi_cypher.to_bytes(512, byteorder='big', signed=False)
-			print('#    =>',end='')
 			socket.sendall(envoi)
 
 
@@ -119,7 +117,8 @@ def chat_run(socket):
 				os.kill(pid, 15) # terminaison du processus enfant
 				break
 			else:
-				print('\b\b\b\b\b\b\b\b\b<=\t\t' + recu_plain + '\n#    =>',end='')
+				print('\r#  <= ' + recu_plain + "\n#  => ", end='')
+				#print(recu_plain)
 
 	socket.close()
 
