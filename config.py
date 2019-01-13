@@ -1,6 +1,6 @@
 
 # Taille des nombres premiers P et Q
-PRIME_SIZE_P = 150 #500
+PRIME_SIZE_P = 500
 MIN_PRIME_SIZE_Q = 451
 AMPL_PRIME_SIZE_Q = 20
 
@@ -19,9 +19,9 @@ PORT_NUMBER = 8790
 
 
 # Affichage du ViteVite
-VITEVITE = ['                     ______     ',
-            '    .----.   @   @  / Vite `--. ',
-            '   / .-"-.`.  \\v/  <    Vite ! )',
+VITEVITE = ["                     ______     ",
+            "    .----.   @   @  / Vite `--. ",
+            "   / .-\"-.`.  \\v/  <    Vite ! )",
             "   | | '\\ \\ \\_/ )   '---------' ",
             " ,-\\ `-.' /.'  /                ",
             "'---`----'----'                 "]

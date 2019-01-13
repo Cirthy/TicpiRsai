@@ -9,7 +9,6 @@ from   display   import *
 from   rsa		import *
 
 
-
 def server_start():
 
 	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

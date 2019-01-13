@@ -45,7 +45,7 @@ else: # parent, chargement des nombres premiers
 index = 0
 
 while(True):
-	display_banner()
+	display_banner() # affiche hulk
 	print("#                                                                                                 #")
 	print("#    Ticpirsai est prêt à établir une connection :                                                #")
 	print("#                                                                                                 #")
