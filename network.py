@@ -102,23 +102,33 @@ def chat_run(socket):
 		if not pid:
 			#enfant
 			envoi_plain = input("#  => ")
-			envoi_cypher = encrypt(envoi_plain)
-			envoi = envoi_cypher.to_bytes(512, byteorder='big', signed=False)
-			socket.sendall(envoi)
-
-
+			while(envoi_plain):							# On est limité par notre n pour la taille des messages envoyés, on envoie donc notre message par blocs
+				envoi_cypher = encrypt(envoi_plain[:64])
+				envoi_plain = envoi_plain[64:]
+				envoi = envoi_cypher.to_bytes(512, byteorder='big', signed=False)
+				socket.sendall(envoi)
+			socket.sendall(config.ETX) # On envoie ETX (End Of Text)
+			time.sleep(0.2)
 		else:
 			#parent
 			recu = socket.recv(512)
-			recu_cipher = int.from_bytes(recu, byteorder='big')
-			recu_plain = decrypt(recu_cipher)
+			recu_plain = ""
+			while(recu != config.ETX and recu != config.EOT):
+				recu_cipher = int.from_bytes(recu, byteorder='big')
+				recu_plain_part = decrypt(recu_cipher)
+				recu_plain += recu_plain_part
+				recu = socket.recv(512)
 			if (recu_plain == 'quit' or recu_plain == 'exit'):
-				socket.sendall(encrypt('quit').to_bytes(512, byteorder='big', signed=False))
+				socket.sendall(config.EOT) # On envoie EOT (End Of Transmission)
+				os.kill(pid, 15) # terminaison du processus enfant
+				break
+			if (recu == config.EOT):
 				os.kill(pid, 15) # terminaison du processus enfant
 				break
 			else:
 				print('\r#  <= ' + recu_plain + "\n#  => ", end='')
-				#print(recu_plain)
 
 	socket.close()
+
+
 

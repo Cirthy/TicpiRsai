@@ -1,12 +1,15 @@
 MAIN = main.py
 
+MAIN_STATS = main_stats.py
 
 
 all :
 	python3 $(MAIN)
 
-i:
-	python3 -i $(MAIN)
+stats:
+	python3 $(MAIN_STATS)
+
+
 
 cleanpy :
 	rm -r __pycache__

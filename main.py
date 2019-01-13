@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 
-import	os, sys, readline, io, select, curses, random
+import	os, sys, readline, io, select, curses, random, config
 
 from	prime_generator	import *
 from	rsa				import *
 from	display			import *
 from	network			import *
+
 
 
 
@@ -19,7 +20,7 @@ os.system("clear")
 print("Veuillez agrandir la console pour que le programme s'affiche correctement (min 99 colonnes).")
 while(True):
 	rows, columns = os.popen('stty size', 'r').read().split()
-	if(int(rows) > 19 and int(columns) > 98):
+	if(int(columns) > 98):
 		break
 	time.sleep(0.1)
 
@@ -76,3 +77,5 @@ while(True):
 	time.sleep(0.1) # refresh pour l'attente d'une entrée 10 fois par seconde
 
 print('')
+
+

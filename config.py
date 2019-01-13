@@ -1,6 +1,6 @@
 
 # Taille des nombres premiers P et Q
-PRIME_SIZE_P = 500
+PRIME_SIZE_P = 150 #500
 MIN_PRIME_SIZE_Q = 451
 AMPL_PRIME_SIZE_Q = 20
 
@@ -29,4 +29,5 @@ VITEVITE_DELAY = 0.09
 
 
 
-
+ETX = ("" + chr(3)).encode('UTF-8') #End of Text
+EOT = ("" + chr(4)).encode('UTF-8') #End of Transmission
